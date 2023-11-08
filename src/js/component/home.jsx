@@ -3,7 +3,7 @@ import SimpleCounter from "./simplecounter";
 
 const Home = () => {
   const [counter, setCounter] = useState(0);
-  const [targetTime, setTargetTime] = useState(10); // Set the target time here
+  const [targetTime, setTargetTime] = useState(10);
   const [isRunning, setIsRunning] = useState(true);
 
   const handleStart = () => {
@@ -24,14 +24,14 @@ const Home = () => {
 
     if (isRunning) {
       intervalId = setInterval(() => {
-        setCounter((prevCounter) => prevCounter + 1); // Counting up
+        setCounter((prevCounter) => prevCounter + 1);
       }, 1000);
     } else {
       clearInterval(intervalId);
     }
 
     if (counter === targetTime) {
-      window.alert("Target time reached!"); // Show alert when the counter reaches the target time
+      window.alert("Target time reached!");
     }
 
     return () => {
