@@ -1,4 +1,7 @@
 import React from "react";
+import { useState, useEffect } from "react";
+
+import SimpleCounter from "./simplecounter";
 
 //include images into your bundle
 
@@ -17,10 +20,11 @@ const Home = () => {
 	}, []);
   
 	return (
-	  <div>
-		<h1>Simple Counter App</h1>
-		<SimpleCounter counter={counter} />
-	  </div>
+	  <>
+		<div>
+			<SimpleCounter counter={counter} />
+		</div>
+	  </>
 	);
   }
   
