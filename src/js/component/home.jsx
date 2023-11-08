@@ -7,12 +7,13 @@ import SimpleCounter from "./simplecounter";
 
 //create your first component
 const Home = () => {
-	const [counter, setCounter] = useState(0);
+	const [counter, setCounter] = useState(1233); // Set the initial count here
   
 	useEffect(() => {
 	  const intervalId = setInterval(() => {
-		setCounter((prevCounter) => prevCounter + 1);
+		setCounter((prevCounter) => prevCounter - 1); // Counting down
 	  }, 1000);
+  
   
 	  return () => {
 		clearInterval(intervalId);
@@ -20,11 +21,9 @@ const Home = () => {
 	}, []);
   
 	return (
-	  <>
 		<div>
-			<SimpleCounter counter={counter} />
+		  <SimpleCounter initialCount={counter} /> {/* Pass the initial count */}
 		</div>
-	  </>
 	);
   }
   

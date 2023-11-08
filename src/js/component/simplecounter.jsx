@@ -1,7 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const SimpleCounter = ({ counter }) => {
+const SimpleCounter = ({ initialCount }) => {
+
+  const counter = Math.max(0, initialCount);
+
   const digitOne = Math.floor((counter / 1) % 10);
   const digitTwo = Math.floor((counter / 10) % 10);
   const digitThree = Math.floor((counter / 100) % 10);
@@ -32,7 +35,7 @@ const SimpleCounter = ({ counter }) => {
 }
 
 SimpleCounter.propTypes = {
-  counter: PropTypes.number,
-};
+    initialCount: PropTypes.number, // Add initialCount to propTypes
+  };
 
 export default SimpleCounter;
