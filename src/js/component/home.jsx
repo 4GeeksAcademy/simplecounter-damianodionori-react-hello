@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import SimpleCounter from "./simplecounter";
 
 const Home = () => {
-  const [counter, setCounter] = useState(60); // Set the initial count here
+  const [counter, setCounter] = useState(0);
+  const [targetTime, setTargetTime] = useState(10); // Set the target time here
   const [isRunning, setIsRunning] = useState(true);
 
   const handleStart = () => {
@@ -15,7 +16,7 @@ const Home = () => {
 
   const handleReset = () => {
     setIsRunning(true);
-    setCounter(60); // Set the initial count here
+    setCounter(0);
   };
 
   useEffect(() => {
@@ -23,16 +24,20 @@ const Home = () => {
 
     if (isRunning) {
       intervalId = setInterval(() => {
-        setCounter((prevCounter) => prevCounter - 1); // Counting down
+        setCounter((prevCounter) => prevCounter + 1); // Counting up
       }, 1000);
     } else {
       clearInterval(intervalId);
     }
 
+    if (counter === targetTime) {
+      window.alert("Target time reached!"); // Show alert when the counter reaches the target time
+    }
+
     return () => {
       clearInterval(intervalId);
     };
-  }, [isRunning]);
+  }, [isRunning, counter, targetTime]);
 
   return (
     <div>
