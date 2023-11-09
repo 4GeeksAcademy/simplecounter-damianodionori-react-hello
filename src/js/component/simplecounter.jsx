@@ -9,6 +9,8 @@ const SimpleCounter = ({ initialCount }) => {
   const digitTwo = Math.floor((counter / 10) % 10);
   const digitThree = Math.floor((counter / 100) % 10);
   const digitFour = Math.floor((counter / 1000) % 10);
+  const digitFive = Math.floor((counter / 10000) % 10);
+  const digitSix = Math.floor((counter / 100000) % 10);
 
 
   return (
@@ -26,6 +28,8 @@ const SimpleCounter = ({ initialCount }) => {
           <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0" />
         </svg>
       </div>
+      <div className="six">{digitSix}</div>
+      <div className="five">{digitFive}</div>
       <div className="four">{digitFour}</div>
       <div className="three">{digitThree}</div>
       <div className="two">{digitTwo}</div>
@@ -35,7 +39,7 @@ const SimpleCounter = ({ initialCount }) => {
 }
 
 SimpleCounter.propTypes = {
-    initialCount: PropTypes.number, // Add initialCount to propTypes
+    initialCount: PropTypes.number,
   };
 
 export default SimpleCounter;
