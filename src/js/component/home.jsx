@@ -1,18 +1,12 @@
 import React, { useState, useEffect } from "react";
-import SimpleCounter from "./simplecounter";
+import SecondsCounter from "./secondscounter";
 
 const Home = () => {
   const [counter, setCounter] = useState(0);
   const [targetTime, setTargetTime] = useState(60);
   const [isCountingUp, setIsCountingUp] = useState(true);
 
-  const handleStart = () => {
-    setIsCountingUp(true);
-  };
-
-  const handleStop = () => {
-    setIsCountingUp(null);
-  };
+  const handler = value => setIsCountingUp (value)
 
   const handleReset = () => {
     setCounter(0);
@@ -21,10 +15,6 @@ const Home = () => {
   const handleCountdown = () => {
     setIsCountingUp(false);
     setCounter(targetTime);
-  };
-
-  const handleCountUp = () => {
-    setIsCountingUp(true);
   };
 
   useEffect(() => {
@@ -52,13 +42,13 @@ const Home = () => {
 
   return (
     <div>
-      <SimpleCounter initialCount={counter} />
+      <SecondsCounter initialCount={counter} />
       <div className="text-center mt-3">
-        <div className="btn-group" role="group">
-          <button className="btn btn-primary" onClick={handleStart} disabled={isCountingUp !== null}>
+        <div className="btn-group button-group" role="group">
+          <button className="btn btn-primary" onClick={() => handler(true)} disabled={isCountingUp !== null}>
             Resume
           </button>
-          <button className="btn btn-secondary" onClick={handleStop} disabled={isCountingUp === null}>
+          <button className="btn btn-secondary" onClick={() => handler(null)} disabled={isCountingUp === null}>
             Stop
           </button>
           <button className="btn btn-danger" onClick={handleReset}>
@@ -67,7 +57,7 @@ const Home = () => {
           <button className="btn btn-warning" onClick={handleCountdown} disabled={isCountingUp !== null}>
             Countdown
           </button>
-          <button className="btn btn-success" onClick={handleCountUp} disabled={isCountingUp !== null}>
+          <button className="btn btn-success" onClick={() => handler(true)} disabled={isCountingUp !== null}>
             Count Up
           </button>
         </div>

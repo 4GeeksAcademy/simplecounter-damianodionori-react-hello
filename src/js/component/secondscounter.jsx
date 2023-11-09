@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const SimpleCounter = ({ initialCount }) => {
+const SecondsCounter = ({ initialCount }) => {
 
   const counter = Math.max(0, initialCount);
 
@@ -38,8 +38,8 @@ const SimpleCounter = ({ initialCount }) => {
   );
 }
 
-SimpleCounter.propTypes = {
+SecondsCounter.propTypes = {
     initialCount: PropTypes.number,
   };
 
-export default SimpleCounter;
+export default SecondsCounter;
