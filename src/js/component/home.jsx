@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
 import SimpleCounter from "./simplecounter";
 
 const Home = () => {
@@ -12,11 +11,10 @@ const Home = () => {
   };
 
   const handleStop = () => {
-    setIsCountingUp(false);
+    setIsCountingUp(null);
   };
 
   const handleReset = () => {
-    setIsCountingUp(true);
     setCounter(0);
   };
 
@@ -32,50 +30,44 @@ const Home = () => {
   useEffect(() => {
     let intervalId;
 
-    if (isCountingUp) {
+    if (isCountingUp !== null) {
       intervalId = setInterval(() => {
         setCounter((prevCounter) => {
-          if (prevCounter === 10) {
+          if ((isCountingUp && prevCounter === 10) || (!isCountingUp && prevCounter === 0)) {
             clearInterval(intervalId);
-            window.alert("Counter Up reached 10 seconds!");
+            window.alert(
+              isCountingUp ? "Counter Up reached 10 seconds!" : "Countdown completed!"
+            );
           }
-          return prevCounter + 1;
+
+          return isCountingUp ? prevCounter + 1 : prevCounter - 1;
         });
       }, 1000);
-    } else {
-      intervalId = setInterval(() => {
-        setCounter((prevCounter) => prevCounter - 1);
-      }, 1000);
-    }
-
-    if ((isCountingUp && counter === targetTime) || (!isCountingUp && counter === 0)) {
-      clearInterval(intervalId);
-      window.alert(isCountingUp ? "Count Up completed!" : "Countdown completed!");
     }
 
     return () => {
       clearInterval(intervalId);
     };
-  }, [isCountingUp, counter, targetTime]);
+  }, [isCountingUp]);
 
   return (
     <div>
       <SimpleCounter initialCount={counter} />
-      <div className="text-center mt-1">
+      <div className="text-center mt-3">
         <div className="btn-group" role="group">
-          <button className="btn btn-primary" onClick={handleStart} disabled={isCountingUp}>
+          <button className="btn btn-primary" onClick={handleStart} disabled={isCountingUp !== null}>
             Resume
           </button>
-          <button className="btn btn-secondary" onClick={handleStop} disabled={!isCountingUp}>
+          <button className="btn btn-secondary" onClick={handleStop} disabled={isCountingUp === null}>
             Stop
           </button>
           <button className="btn btn-danger" onClick={handleReset}>
             Reset
           </button>
-          <button className="btn btn-warning" onClick={handleCountdown} disabled={!isCountingUp}>
+          <button className="btn btn-warning" onClick={handleCountdown} disabled={isCountingUp !== null}>
             Countdown
           </button>
-          <button className="btn btn-success" onClick={handleCountUp} disabled={isCountingUp}>
+          <button className="btn btn-success" onClick={handleCountUp} disabled={isCountingUp !== null}>
             Count Up
           </button>
         </div>
@@ -83,7 +75,5 @@ const Home = () => {
     </div>
   );
 };
-
-Home.propTypes = {};
 
 export default Home;
