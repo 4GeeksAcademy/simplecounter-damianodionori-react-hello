@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import SecondsCounter from "./secondscounter";
+import Button from "./buttons";
 
 const Home = () => {
   const [counter, setCounter] = useState(0);
@@ -42,26 +43,40 @@ const Home = () => {
 
   return (
     <div>
-      <SecondsCounter initialCount={counter} />
-      <div className="text-center mt-3">
-        <div className="btn-group button-group" role="group">
-          <button className="btn btn-primary" onClick={() => handler(true)} disabled={isCountingUp !== null}>
-            Resume
-          </button>
-          <button className="btn btn-secondary" onClick={() => handler(null)} disabled={isCountingUp === null}>
-            Stop
-          </button>
-          <button className="btn btn-danger" onClick={handleReset}>
-            Reset
-          </button>
-          <button className="btn btn-warning" onClick={handleCountdown} disabled={isCountingUp !== null}>
-            Countdown
-          </button>
-          <button className="btn btn-success" onClick={() => handler(true)} disabled={isCountingUp !== null}>
-            Count Up
-          </button>
-        </div>
+    <SecondsCounter initialCount={counter} />
+    <div className="text-center mt-3">
+      <div className="btn-group button-group" role="group">
+        <Button
+          onClick={() => handler(true)}
+          disabled={isCountingUp !== null}
+          label="Resume"
+          btnClass="btn-primary"
+        />
+        <Button
+          onClick={() => handler(null)}
+          disabled={isCountingUp === null}
+          label="Stop"
+          btnClass="btn-secondary"
+        />
+        <Button
+          onClick={handleReset}
+          label="Reset"
+          btnClass="btn-danger"
+        />
+        <Button
+          onClick={handleCountdown}
+          disabled={isCountingUp !== null}
+          label="Countdown"
+          btnClass="btn-warning"
+        />
+        <Button
+          onClick={() => handler(true)}
+          disabled={isCountingUp !== null}
+          label="Count Up"
+          btnClass="btn-success"
+        />
       </div>
+    </div>
     </div>
   );
 };
